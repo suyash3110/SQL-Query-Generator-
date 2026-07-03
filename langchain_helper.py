@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-
+ 
 from langchain.prompts import SemanticSimilarityExampleSelector, PromptTemplate, FewShotPromptTemplate
 from langchain.chains.sql_database.prompt import PROMPT_SUFFIX
 from langchain_experimental.sql import SQLDatabaseChain
