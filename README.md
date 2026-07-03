@@ -2,73 +2,153 @@
 
 ## Overview
 
-The Custom SQL Query Generator leverages machine learning and generative AI to automatically generate SQL queries based on natural language input. It uses GooglePalm and GeminiAI for natural language processing and ChromaDB as the vector database. The web interface is built using Streamlit.
+Custom SQL Query Generator is an AI-powered application that converts natural language questions into executable SQL queries. Built using Google Gemini, LangChain, and ChromaDB, the application understands user intent, retrieves semantically similar examples using Few-Shot Learning, generates optimized MySQL queries, executes them on the connected database, and displays the results through an interactive Streamlit interface.
 
-## Tech Stack
-
-- **Machine Learning**: Jupyter Notebook
-- **Libraries**: TensorFlow
-- **Generative-AI**: GooglePalm and GeminiAI
-- **Vector Database**: ChromaDB
-- **Web Interface**: Streamlit
+---
 
 ## Features
 
-- Generate SQL queries from natural language input.
-- Interactive web interface for ease of use.
-- Supports semantic search and similarity matching with ChromaDB.
+- Convert natural language into executable MySQL queries.
+- AI-powered SQL generation using Google Gemini and LangChain.
+- Semantic Few-Shot Learning using ChromaDB and Sentence Transformers.
+- Automatic execution of generated SQL queries.
+- Interactive Streamlit web interface.
+- Real-time query results and database interaction.
+- Context-aware SQL generation with semantic similarity search.
+
+---
+
+## Tech Stack
+
+- **Programming Language:** Python
+- **LLM:** Google Gemini
+- **Framework:** LangChain
+- **Vector Database:** ChromaDB
+- **Embeddings:** Sentence Transformers (all-MiniLM-L6-v2)
+- **Database:** MySQL
+- **Frontend:** Streamlit
+- **Environment Management:** Python Dotenv
+
+---
+
+## Project Structure
+
+```
+.
+├── main.py                 # Streamlit frontend
+├── langchain_helper.py     # LangChain pipeline and SQL chain
+├── few_shots.py            # Few-shot prompt examples
+├── CustomSQLQueryGen.ipynb # Development notebook
+├── requirements.txt
+└── README.md
+```
+
+---
 
 ## Installation
 
-### Prerequisites
+### Clone the Repository
 
-Ensure you have Python 3.9+ installed on your machine.
+```bash
+git clone https://github.com/yourusername/CustomDB-SQL_Query_Generator.git
+cd CustomDB-SQL_Query_Generator
+```
 
-### Steps
+### Create Virtual Environment
 
-1. **Clone the repository**:
-    ```sh
-    git clone https://github.com/ArkaChakraborty2804/CustomDB-SQL_Qery_Generator.git
-    cd CustomDB-SQL_Qery_Generator
-    ```
+```bash
+python -m venv venv
+```
 
-2. **Set up a virtual environment**:
-    ```sh
-    python -m venv venv
-    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
-    ```
+Windows
 
-3. **Install dependencies**:
-    ```sh
-    pip install -r requirements.txt
-    ```
+```bash
+venv\Scripts\activate
+```
 
-4. **Set up environment variables**:
-    Create a `.env` file in the project root and add your API keys:
-    ```dotenv
-    GOOGLE_API_KEY=your_google_api_key
-    GEMINI_API_KEY=your_gemini_api_key
-    ```
+Linux / macOS
 
-## Usage
+```bash
+source venv/bin/activate
+```
 
-1. **Run the Jupyter Notebook**:
-    - Start Jupyter Notebook:
-      ```sh
-      jupyter notebook
-      ```
-    - Open the relevant notebook and execute the cells to perform machine learning tasks and model training.
+### Install Dependencies
 
-2. **Run the Streamlit Web Interface**:
-    - Start the Streamlit server:
-      ```sh
-      streamlit run main.py
-      ```
-    - Open the provided URL in your web browser to access the application.
+```bash
+pip install -r requirements.txt
+```
 
-3. **Example Query**:
-    - In the Streamlit web interface, enter a natural language query such as "How many white color Levi's shirts do I have?" and receive the corresponding SQL query.
+---
 
-## Contributing
+## Environment Variables
 
-Contributions are welcome! Please open an issue or submit a pull request.
+Create a `.env` file in the project directory.
+
+```env
+GOOGLE_API_KEY=YOUR_GOOGLE_API_KEY
+```
+
+---
+
+## Database Configuration
+
+Update the MySQL credentials inside `langchain_helper.py`.
+
+```python
+db_user = "root"
+db_password = "your_password"
+db_host = "localhost:3306"
+db_name = "your_database"
+```
+
+Make sure your MySQL server is running before launching the application.
+
+---
+
+## Running the Application
+
+Start the Streamlit server:
+
+```bash
+streamlit run main.py
+```
+
+Open the generated local URL in your browser.
+
+---
+
+## Example Queries
+
+- How many white Levi's T-shirts are available?
+- What is the total inventory value for Nike products?
+- Show the revenue generated after discounts.
+- How many XL T-shirts are currently in stock?
+- Which brand has the highest inventory value?
+
+---
+
+## How It Works
+
+1. User enters a natural language question.
+2. ChromaDB retrieves the most semantically similar examples.
+3. LangChain constructs a Few-Shot prompt.
+4. Google Gemini generates an optimized SQL query.
+5. The query executes on the MySQL database.
+6. Results are returned and displayed in the Streamlit interface.
+
+---
+
+## Future Improvements
+
+- Support PostgreSQL and SQLite
+- Query history
+- Authentication and user management
+- SQL query explanation
+- Export query results to CSV/Excel
+- Interactive database schema visualization
+
+---
+
+## License
+
+This project is licensed under the MIT License.
